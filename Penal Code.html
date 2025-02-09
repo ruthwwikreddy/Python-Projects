@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Indian Penal Code Chatbot</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <div class="chatbox">
+    <div class="chatlogs" id="chatlogs">
+      <!-- Chat messages will be appended here -->
+    </div>
+    <div class="user-input">
+      <input type="text" id="userInput" placeholder="Type your question...">
+      <button onclick="sendUserMessage()">Send</button>
+    </div>
+  </div>
+  <script>
+    // Sample chatbot responses related to the Indian Penal Code and laws in India
+    const chatbotResponses = {
+      greeting: "Hello! I'm your Indian Penal Code chatbot. How can I assist you?",
+      farewell: "Thank you for using our chatbot. Have a great day!",
+      intro: "The Indian Penal Code (IPC) is the main criminal code of India. It covers various crimes and their punishments.",
+      ipcLink: "You can read the Indian Penal Code online on the official Indiacode website: <a href='https://www.indiacode.nic.in/' target='_blank'>Indiacode</a>.",
+      dowry: "Dowry is a social evil and giving or taking dowry is illegal under the Dowry Prohibition Act.",
+      cyberCrime: "Cybercrimes are governed by the Information Technology Act, 2000, and can include offenses like hacking and online fraud.",
+      punishment: "Punishments for different crimes under the IPC can range from fines to imprisonment or even the death penalty.",
+      default: "I'm sorry, but I couldn't understand your question. Please try again.",
+    };
+
+    // Function to generate a chatbot response based on user input
+    function getChatbotResponse(userInput) {
+      userInput = userInput.trim().toLowerCase();
+
+      if (userInput.includes("hello") || userInput.includes("hi")) {
+        return chatbotResponses.greeting;
+      } else if (userInput.includes("bye")) {
+        return chatbotResponses.farewell;
+      } else if (userInput.includes("introduction") || userInput.includes("intro")) {
+        return chatbotResponses.intro;
+      } else if (userInput.includes("ipc") || userInput.includes("penal code")) {
+        return chatbotResponses.ipcLink;
+      } else if (userInput.includes("dowry")) {
+        return chatbotResponses.dowry;
+      } else if (userInput.includes("cybercrime")) {
+        return chatbotResponses.cyberCrime;
+      } else if (userInput.includes("punishment")) {
+        return chatbotResponses.punishment;
+      } else {
+        return chatbotResponses.default;
+      }
+    }
+
+    // Function to display user and chatbot messages in the chatbox
+    function appendMessage(sender, message) {
+      const chatlogs = document.getElementById("chatlogs");
+      const messageElement = document.createElement("div");
+      messageElement.innerHTML = `<span class="sender">${sender}:</span> ${message}`;
+      chatlogs.appendChild(messageElement);
+    }
+
+    // Function to handle user input and chatbot responses
+    function sendUserMessage() {
+      const userInput = document.getElementById("userInput").value;
+      if (userInput.trim() !== "") {
+        appendMessage("You", userInput);
+        const chatbotResponse = getChatbotResponse(userInput);
+        appendMessage("Chatbot", chatbotResponse);
+        document.getElementById("userInput").value = "";
+      }
+    }
+
+    // Event listener for handling user input when pressing "Enter" key
+    document.getElementById("userInput").addEventListener("keyup", function (event) {
+      if (event.key === "Enter") {
+        sendUserMessage();
+      }
+    });
+  </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .chatbox {
+      width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .chatlogs {
+      max-height: 300px;
+      overflow-y: scroll;
+      padding: 10px;
+    }
+
+    .chatlogs div {
+      margin: 5px 0;
+    }
+
+    .user-input {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #f4f4f4;
+      border-top: 1px solid #ccc;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 8px 16px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    button:active {
+      background-color: #003d80;
+    }
+
+    .sender {
+      font-weight: bold;
+    }
+
+    a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</body>
+</html>
